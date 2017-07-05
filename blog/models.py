@@ -49,7 +49,7 @@ class Post(models.Model):
                     'markdown.extensions.codehilite',
                 ]
             )
-            self.excerpt = strip_tags(md.convert(self.body)[:45])
+            self.excerpt = strip_tags(md.convert(self.body)[:55])
 
         # 调用父类save方法，讲数据保存到数据库中
         super(Post,self).save(*args,**kwargs)
