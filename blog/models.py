@@ -25,12 +25,17 @@ class Post(models.Model):
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(User)
+    views = models.PositiveIntegerField(default=0) # 只允许正整数或0，不能为负数
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse ('blog:detail', kwargs={'pk': self.pk})
+
+    def increase_views(self):
+        self.views += 1
+        self.save(update_fields=['views']) # 只更新views字段
 
     class Meta:
         ordering = ['-created_time']

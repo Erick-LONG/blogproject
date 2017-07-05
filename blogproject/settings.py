@@ -23,8 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ti(txjctbey$5dn(1eb-_w90w8m*)^aht-x48e_k0*mnlr107n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
+# 生产环境配置成FALSE
 DEBUG = True
 
+# 最后换成自己的域名'127.0.0.1', 'localhost ', '.xxx.com'
 ALLOWED_HOSTS = []
 
 
@@ -120,3 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 生产环境加入下面的配置
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

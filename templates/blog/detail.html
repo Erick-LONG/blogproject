@@ -8,8 +8,8 @@
                 <span class="post-date"><a href="#"><time class="entry-date"
                                                           datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
                 <span class="post-author"><a href="#">{{ post.author }}</a></span>
-                <span class="comments-link"><a href="#">4 评论</a></span>
-                <span class="views-count"><a href="#">588 阅读</a></span>
+                <span class="comments-link"><a href="#">{{ post.comment_set.count }} 评论</a></span>
+                <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
             </div>
         </header>
         <div class="entry-content clearfix">
@@ -24,12 +24,12 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-md-4">
-                <label for="{{ form.name.id_for_label }}">名字：</label>
+                <label for="{{ form.name.id_for_label }}">* 名字：</label>
                 {{ form.name }}
                 {{ form.name.errors }}
             </div>
             <div class="col-md-4">
-                <label for="{{ form.email.id_for_label }}">邮箱：</label>
+                <label for="{{ form.email.id_for_label }}">* 邮箱：</label>
                 {{ form.email }}
                 {{ form.email.errors }}
             </div>
@@ -39,7 +39,7 @@
                 {{ form.url.errors }}
             </div>
             <div class="col-md-12">
-                <label for="{{ form.text.id_for_label }}">评论：</label>
+                <label for="{{ form.text.id_for_label }}">* 评论：</label>
                 {{ form.text }}
                 {{ form.text.errors }}
                 <button type="submit" class="comment-btn">发表</button>
