@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
-from .models import Post,Category
+from .models import Post,Category,Tag
 import markdown
 from comments.forms import CommentForm
 from django.views.generic import ListView,DetailView
@@ -175,3 +175,10 @@ class PostDetailView(DetailView):
 		return context
 
 
+# 分类标签
+class TagView(IndexView):
+	# 重写get_queryset方法，根据分类返回的ID，筛选文章
+	# 命名组参数保存在kwargs中，非命名组参数保存在args中
+	def get_queryset(self):
+		tag = get_object_or_404(Tag,pk = self.kwargs.get('pk'))
+		return super(TagView,self).get_queryset().filter(tags=tag)
