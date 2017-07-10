@@ -1,9 +1,10 @@
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponse
 from .models import Post,Category,Tag
 import markdown
 from comments.forms import CommentForm
 from django.views.generic import ListView,DetailView
+from django.utils.text import slugify
+from markdown.extensions.toc import TocExtension
 
 class IndexView(ListView):
 	model = Post
@@ -157,10 +158,13 @@ class PostDetailView(DetailView):
 		# 重写 get_object 方法的目的是因为需要对 post 的 body 值进行渲染
 		post = super(PostDetailView,self).get_object(queryset=None)
 		# 将文章转换成markdown格式
-		post.body = markdown.markdown (post.body, extensions=[
+		md = markdown.Markdown (extensions=[
 			'markdown.extensions.extra',
-			'markdown.extensions.codehilite',
-			'markdown.extensions.toc', ])
+			'markdown.extensions.codehilite', #代码高亮
+			TocExtension(slugify=slugify), ])# 生成目录,处理标题的链接锚点值，slugify用于处理中文
+		# 一旦调用md.convert方法后，实例 md 就会多出一个 toc 属性
+		post.body = md.convert(post.body)
+		post.toc = md.toc
 		return post
 
 	def get_context_data(self, **kwargs):
