@@ -135,8 +135,8 @@ class CategoryView(IndexView):
 #按月归档函数
 class ArchivesView(IndexView):
 	def get_queryset(self):
-		year = self.kwargs.year
-		month = self.kwargs.month
+		year = self.kwargs.get('year')
+		month = self.kwargs.get('month')
 		return super(ArchivesView,self).get_queryset().filter(
 			created_time__year=year,
 			created_time__month=month,)
