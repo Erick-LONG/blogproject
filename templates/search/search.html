@@ -6,7 +6,7 @@
             <article class="post post-{{ result.object.pk }}">
                 <header class="entry-header">
                     <h1 class="entry-title">
-                        <a href="{{ result.object.get_absolute_url }}">{% highlight result.object.title with query html_tag "span" css_class "highlighted" %}</a>
+                        <a href="{{ result.object.get_absolute_url }}">{% highlight result.object.title with query %}</a>
                     </h1>
                     <div class="entry-meta">
                     <span class="post-category">
@@ -24,7 +24,7 @@
                     </div>
                 </header>
                 <div class="entry-content clearfix">
-                    <p>{% highlight result.object.body with query html_tag "span" css_class "highlighted" %} %}</p>
+                    <p>{% highlight result.object.body with query %} %}</p>
                     <div class="read-more cl-effect-14">
                         <a href="{{ result.object.get_absolute_url }}" class="more-link">继续阅读 <span
                                 class="meta-nav">→</span></a>

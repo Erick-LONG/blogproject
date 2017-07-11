@@ -7,6 +7,7 @@ from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
 from django.db.models import Q # 包装查询表达式
 
+'''
 def search(request):
 	q = request.GET.get('q')
 	error_msg = ''
@@ -17,7 +18,7 @@ def search(request):
 
 	post_list = Post.objects.filter(Q(title__icontains=q) | Q(body__contains=q)) # Field lookups在模型需要筛选的属性后面跟上两个下划线
 	return render(request,'blog/index.html',{'error_msg':error_msg,'post_list':post_list})
-
+'''
 class IndexView(ListView):
 	model = Post
 	template_name = 'blog/index.html'
